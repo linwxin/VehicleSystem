@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:with="title='管理中心',active='home'">
+<header th:replace="admin/header::headerFragment(${title},${active})"></header>
+<body class="fixed-left">
+<div id="wrapper">
+    <div th:replace="admin/header::header-body"></div>
+    <div class="content-page">
+        <div class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title">今日车流</h4>
+                    </div>
+
+                    <div class="col-md-9">
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>设备ID</th>
+                                <th>大型汽车</th>
+                                <th>小型汽车</th>
+                                <th>两轮/三轮车</th>
+                                <th>其他</th>
+                                <th>汽车流量</th>
+                                <th>总车流量</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <th:block >
+                                <tr th:cid="1">
+                                    <td th:text="S2"></td>
+                                    <td th:text="12"></td>
+                                    <td th:text="25"></td>
+                                    <td th:text="10"></td>
+                                    <td th:text="5"></td>
+                                    <td th:text="37"></td>
+                                    <td th:text="47"></td>
+                                    <td>
+                                        <!--
+                                        <a href="#" class="btn btn-primary btn-sm waves-effect waves-light m-b-5"><i
+                                                class="fa fa-edit"></i> <span>详情</span></a>
+                                        -->
+                                        <a href="#"
+                                           class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i
+                                                class="fa "></i> <span>刷新</span></a>
+                                        <a class="btn btn-warning btn-sm waves-effect waves-light m-b-5"
+                                           href="javascript:void(0)" th:onclick="'minitor();'"
+                                           target="_blank"><i
+                                                class="fa fa-rocket"></i> <span>查看监控</span></a>
+                                    </td>
+                                </tr>
+                                <tr th:cid="1">
+                                    <td th:text="S5"></td>
+                                    <td th:text="122"></td>
+                                    <td th:text="215"></td>
+                                    <td th:text="10"></td>
+                                    <td th:text="56"></td>
+                                    <td th:text="370"></td>
+                                    <td th:text="470"></td>
+                                    <td>
+                                        <!--
+                                        <a href="#" class="btn btn-primary btn-sm waves-effect waves-light m-b-5"><i
+                                                class="fa fa-edit"></i> <span>详情</span></a>
+                                        -->
+                                        <a href="#"
+                                           class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i
+                                                class="fa "></i> <span>刷新</span></a>
+                                        <a class="btn btn-warning btn-sm waves-effect waves-light m-b-5"
+                                           href="javascript:void(0)" th:onclick="'minitor();'"
+                                           target="_blank"><i
+                                                class="fa fa-rocket"></i> <span>查看监控</span></a>
+                                    </td>
+                                </tr>
+                            </th:block>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-3 ">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">系统日志</h4>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="list-group" >
+                                    <li class="list-group-item" th:each="log : ${logs}">
+                                        <span th:text="${commons.fmtdate(log.created, 'yyyy-MM-dd HH:mm:ss')} +' => '+ ${log.action}"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="panel panel-default col">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">通知</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="list-group">
+                                        <li class="list-group-item" th:each="article : ${articles}">
+                            <span class="badge badge-primary"
+                                  th:title="${article.commentsNum}+'条评论'" th:text="${article.commentsNum}"></span>
+                                            <a target="_blank" th:href="${commons.site_url('/article/')}+${article.cid}"
+                                               th:text="${article.title}"></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">系统日志</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <ul class="list-group" >
+                                        <li class="list-group-item" th:each="log : ${logs}">
+                                            <span th:text="${commons.fmtdate(log.created, 'yyyy-MM-dd HH:mm:ss')} +' => '+ ${log.action}"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    -->
+                </div>
+                <div th:replace="admin/footer :: footer-content"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="admin/footer :: footer"></div>
+<script type="text/javascript">
+    function minitor() {
+        alert("在此显示监控实时视频");
+    }
+</script>
+</body>
+</html>
