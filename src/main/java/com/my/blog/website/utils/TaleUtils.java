@@ -355,13 +355,20 @@ public class TaleUtils {
         return false;
     }
 
+    /**
+     * 获取fileKey,具体就是,把文件名用UUID替代,再加上后缀,前面在加上路径.
+     * exmple: /upload/2019/01/UUID.mp4
+     * @param name
+     * @return
+     */
     public static String getFileKey(String name) {
-        String prefix = "/upload/" + DateKit.dateFormat(new Date(), "yyyy/MM");
+        String prefix = "/upload/" + DateKit.dateFormat(new Date(), "yyyy/MM");// 按日期生成文件夹
+        // 看看有没有这个目录，没有的话创建一个
         if (!new File(AttachController.CLASSPATH + prefix).exists()) {
             new File(AttachController.CLASSPATH + prefix).mkdirs();
         }
 
-        name = StringUtils.trimToNull(name);
+        name = StringUtils.trimToNull(name);// 去掉文件名前后端的特殊字符 '/t' ' ' 等
         if (name == null) {
             return prefix + "/" + UUID.UU32() + "." + null;
         } else {
