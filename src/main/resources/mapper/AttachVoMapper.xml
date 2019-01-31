@@ -8,6 +8,7 @@
     <result column="fkey" jdbcType="VARCHAR" property="fkey" />
     <result column="author_id" jdbcType="INTEGER" property="authorId" />
     <result column="created" jdbcType="INTEGER" property="created" />
+      <result column="fdate" jdbcType="VARCHAR" property="fdate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, fname, ftype, fkey, author_id, created
+    id, fname, ftype, fkey, author_id, created, fdate
   </sql>
   <select id="selectByExample" parameterType="com.my.blog.website.model.Vo.AttachVoExample" resultMap="BaseResultMap">
     select
@@ -110,10 +111,11 @@
   </delete>
   <insert id="insert" parameterType="com.my.blog.website.model.Vo.AttachVo" useGeneratedKeys="true" keyProperty="id">
     insert into t_attach (id, fname, ftype, 
-      fkey, author_id, created
+      fkey, author_id, created, fdate,
       )
     values (#{id,jdbcType=INTEGER}, #{fname,jdbcType=VARCHAR}, #{ftype,jdbcType=VARCHAR}, 
-      #{fkey,jdbcType=VARCHAR}, #{authorId,jdbcType=INTEGER}, #{created,jdbcType=INTEGER}
+      #{fkey,jdbcType=VARCHAR}, #{authorId,jdbcType=INTEGER}, #{created,jdbcType=INTEGER},
+      #{fdate,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.my.blog.website.model.Vo.AttachVo" useGeneratedKeys="true" keyProperty="id">
@@ -137,6 +139,9 @@
       <if test="created != null">
         created,
       </if>
+      <if test="fdate != null">
+        fdate,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -156,6 +161,9 @@
       </if>
       <if test="created != null">
         #{created,jdbcType=INTEGER},
+      </if>
+      <if test="fdate != null">
+        #{fdate,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -186,6 +194,9 @@
       <if test="record.created != null">
         created = #{record.created,jdbcType=INTEGER},
       </if>
+      <if test="record.fdate != null">
+          fdate = #{record.fdate,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -198,7 +209,8 @@
       ftype = #{record.ftype,jdbcType=VARCHAR},
       fkey = #{record.fkey,jdbcType=VARCHAR},
       author_id = #{record.authorId,jdbcType=INTEGER},
-      created = #{record.created,jdbcType=INTEGER}
+      created = #{record.created,jdbcType=INTEGER},
+      fdate = #{record.fdate,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -221,6 +233,9 @@
       <if test="created != null">
         created = #{created,jdbcType=INTEGER},
       </if>
+      <if test="fdate != null">
+        fdate = #{fdate, jdbcType=VARCHAR}
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -230,7 +245,8 @@
       ftype = #{ftype,jdbcType=VARCHAR},
       fkey = #{fkey,jdbcType=VARCHAR},
       author_id = #{authorId,jdbcType=INTEGER},
-      created = #{created,jdbcType=INTEGER}
+      created = #{created,jdbcType=INTEGER},
+      fdate = #{fdate, jdbcType=VARCHAR}w
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

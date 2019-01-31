@@ -44,13 +44,14 @@ public class AttachServiceImpl implements IAttachService {
 
     @Override
     @Transactional
-    public void save(String fname, String fkey, String ftype, Integer author) {
+    public void save(String fname, String fkey, String ftype, Integer author, String fdate) {
         AttachVo attach = new AttachVo();
         attach.setFname(fname);
         attach.setAuthorId(author);
         attach.setFkey(fkey);
         attach.setFtype(ftype);
         attach.setCreated(DateKit.getCurrentUnixTime());
+        attach.setFdate(fdate);
         attachDao.insertSelective(attach);
     }
 

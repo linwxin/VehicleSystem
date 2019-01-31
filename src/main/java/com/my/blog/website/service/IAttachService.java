@@ -3,6 +3,8 @@ package com.my.blog.website.service;
 import com.github.pagehelper.PageInfo;
 import com.my.blog.website.model.Vo.AttachVo;
 
+import java.util.Date;
+
 /**
  * Created by wangq on 2017/3/20.
  */
@@ -23,7 +25,7 @@ public interface IAttachService {
      * @param ftype
      * @param author
      */
-    void save(String fname, String fkey, String ftype, Integer author);
+    void save(String fname, String fkey, String ftype, Integer author, String fdate);
 
     /**
      * 根据附件id查询附件

@@ -1,6 +1,7 @@
 package com.my.blog.website.model.Vo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author 
@@ -18,7 +19,17 @@ public class AttachVo implements Serializable {
 
     private Integer created;
 
+    private String fdate;
+
     private static final long serialVersionUID = 1L;
+
+    public String getFdate() {
+        return fdate;
+    }
+
+    public void setFdate(String fdate) {
+        this.fdate = fdate;
+    }
 
     public Integer getId() {
         return id;

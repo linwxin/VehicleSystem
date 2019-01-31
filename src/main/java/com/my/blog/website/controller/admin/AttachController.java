@@ -24,7 +24,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -83,12 +85,16 @@ public class AttachController extends BaseController {
                     String fkey = TaleUtils.getFileKey(fname);
                     String ftype = TaleUtils.isImage(multipartFile.getInputStream()) ? Types.IMAGE.getType() : Types.FILE.getType();
                     File file = new File(CLASSPATH + fkey);
+                    Date dNow = new Date();
+                    SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                    String fdate = ft.format(dNow);
+
                     try {
                         FileCopyUtils.copy(multipartFile.getInputStream(), new FileOutputStream(file));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    attachService.save(fname, fkey, ftype, uid);
+                    attachService.save(fname, fkey, ftype, uid, fdate);
                 } else {
                     errorFiles.add(fname);
                 }
