@@ -124,7 +124,7 @@
                                     <td th:text="${attach.fname}">1</td>
                                     <td th:text="${attach.fdate}">1</td>
                                     <td>
-                                        <a href="#"
+                                        <a href="javascript:void(0)" th:onclick="'delAttach('+${attach.id}+');'"
                                            class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i
                                                 class="fa "></i> <span>删除</span></a>
                                         <a href="#"
