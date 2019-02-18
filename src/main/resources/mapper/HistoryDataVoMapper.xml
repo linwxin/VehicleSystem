@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.my.blog.website.dao.HistoryDataVoMapper">
+    <select id="queryHistroyData" resultType="com.my.blog.website.model.Vo.HistoryDataVo">
+        select id, vehicle_type, location, date
+        from t_history
+        order by date
+        desc
+    </select>
+
+    <select id="queryHistoryDataByDeviceId" resultType="com.my.blog.website.model.Vo.HistoryDataVo">
+        select id, vehicle_type, location, date
+        from t_history
+        where id = #{deviceId}
+    </select>
+
+    <insert id="insertHistoryData" useGeneratedKeys="true" keyProperty="id"
+    keyColumn="id" parameterType="com.my.blog.website.model.Vo.HistoryDataVo">
+        insert into
+        t_history(id, vehicle_type, location, date)
+        values
+        (#{id}, #{vehicleType}, #{location}, #{date})
+    </insert>
+
+    <update id="updateHistoryData">
+        update t_history
+        <set>
+            <if test="vehicleType != null">vehicle_type=#{vehicleType},</if>
+            <if test="location != null">location=#{location},</if>
+            <if test="date != null">date=#{date}</if>
+        </set>
+        where id=#{id}
+    </update>
+    <delete id="deleteHistoryDataById">
+        delete from
+          t_history
+        where
+          id=#{id}
+
+    </delete>
+
+</mapper>
