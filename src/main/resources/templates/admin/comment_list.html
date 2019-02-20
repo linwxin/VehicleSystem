@@ -27,16 +27,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <th:block>
+                            <th:block th:each="history : ${historyData}">
                                 <tr >
                                     <td><input type="checkbox" /></td>
-                                    <td>
-                                        <a href="#"
-                                           target="_blank" utext="1"></a>
-                                    </td>
-                                    <td th:text="1"></td>
-                                    <td th:text="1"></td>
-                                    <td th:text="小车"></td>
+                                    <!--
+                                    <td><a href="#" target="_blank" utext="1"></a></td>
+                                    -->
+                                    <td th:text="${history.id}"></td>
+                                    <td th:text="${history.date}"></td>
+                                    <td th:text="${history.location}"></td>
+                                    <td th:text="${history.vehicleType}"></td>
                                     <td>
                                         <th:block >
                                             <a href="javascript:void(0)"

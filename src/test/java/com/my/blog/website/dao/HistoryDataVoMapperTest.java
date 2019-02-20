@@ -22,6 +22,8 @@ public class HistoryDataVoMapperTest {
     @Ignore
     public void queryHistroyData() {
         List<HistoryDataVo> historyDataVos = historyDataVoMapper.queryHistroyData();
+        HistoryDataVo historyDataVo = historyDataVos.get(0);
+        System.out.println(historyDataVo.getId() + " " + historyDataVo.getVehicleType());
         assertEquals(1, historyDataVos.size());
     }
     @Test
@@ -32,12 +34,12 @@ public class HistoryDataVoMapperTest {
     }
 
     @Test
-    @Ignore
+    //@Ignore
     public void insertHistoryData() {
         HistoryDataVo historyDataVo = new HistoryDataVo();
         historyDataVo.setId("555");
         historyDataVo.setDate("2019-02-18");
-        historyDataVo.setLocation("池塘边");
+        historyDataVo.setLocation("榕树下");
         historyDataVo.setVehicleType("货车");
         int effectedNum = historyDataVoMapper.insertHistoryData(historyDataVo);
         assertEquals(1, effectedNum);
@@ -47,13 +49,14 @@ public class HistoryDataVoMapperTest {
     @Ignore
     public void updateHistoryData() {
         HistoryDataVo historyDataVo = new HistoryDataVo();
-        historyDataVo.setId("555");
+        historyDataVo.setId("666");
         historyDataVo.setLocation("榕树下");
         int effectedNum = historyDataVoMapper.updateHistoryData(historyDataVo);
         assertEquals(1, effectedNum);
     }
 
     @Test
+    @Ignore
     public void deleteHistoryDataById() {
         int effectedNum = historyDataVoMapper.deleteHistoryDataById("555");
         assertEquals(1, effectedNum);
