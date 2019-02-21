@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <link th:href="@{/admin/layui/css/layui.css}" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div>
+    <div class="layui-inline"> <!-- 注意：这一层元素并不是必须的 -->
+        <input type="text" class="layui-input" id="test1" />
+    </div>
+    <input type="button" class="layui-btn" onclick="myFunction()" value="显示日期" />
+    <a th:href="@{/helloAjax}">Hello Ajax</a>
+</div>
+
+<script th:src="@{/admin/layui/layui.js}" ></script>
+<script>
+    window.onload = function () {
+        // 1. 获取 a 节点, 并为其添加 onclick 响应函数
+        document.getElementsByTagName("a")[0].onclick = function() {
+
+
+            // 2. 取消 a 节点的默认行为
+            return false;
+        }
+    }
+
+    var mydate = document.getElementById("test1");
+
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#test1', //指定元素
+            range: true
+        });
+    });
+
+    function myFunction()
+    {
+        var mydate = document.getElementById('test1');
+        layui.use(['layer', 'form'], function(){
+            var layer = layui.layer
+                ,form = layui.form;
+
+            layer.msg(mydate.value);
+        });
+    }
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

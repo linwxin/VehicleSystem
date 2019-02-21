@@ -3,9 +3,17 @@
 
 <mapper namespace="com.my.blog.website.dao.HistoryDataVoMapper">
 
-    <select id="queryHistroyData" resultType="com.my.blog.website.model.Vo.HistoryDataVo">
-        select id, vehicle_type, location, date
-        from t_history
+    <select id="queryHistroyData" resultType="com.my.blog.website.model.Vo.HistoryDataVo"
+        parameterType="java.util.HashMap">
+        select * from t_history
+        <where>
+            <if test="startTime != null and startTime !='' ">
+                date &gt;= #{startTime}
+            </if>
+            <if test="endTime != null and startTime != '' ">
+                and date &lt;= #{endTime}
+            </if>
+        </where>
         order by date
         desc
     </select>
@@ -16,7 +24,7 @@
         where id = #{deviceId}
     </select>
 
-    <insert id="insertHistoryData" useGeneratedKeys="true" keyProperty="id"
+    <insert id="insertHistoryData" useGeneratedKeys="false" keyProperty="id"
     keyColumn="id" parameterType="com.my.blog.website.model.Vo.HistoryDataVo">
         insert into
         t_history(id, vehicle_type, location, date)

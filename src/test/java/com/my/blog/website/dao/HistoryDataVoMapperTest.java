@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
@@ -21,10 +23,13 @@ public class HistoryDataVoMapperTest {
     @Test
     @Ignore
     public void queryHistroyData() {
-        List<HistoryDataVo> historyDataVos = historyDataVoMapper.queryHistroyData();
+        Map<String, String> condition = new HashMap<>();
+        condition.put("startTime", "2019-02-01");
+        condition.put("endTime", "2019-02-22");
+        List<HistoryDataVo> historyDataVos = historyDataVoMapper.queryHistroyData(condition);
+        System.out.println(historyDataVos.size());
         HistoryDataVo historyDataVo = historyDataVos.get(0);
         System.out.println(historyDataVo.getId() + " " + historyDataVo.getVehicleType());
-        assertEquals(1, historyDataVos.size());
     }
     @Test
     @Ignore
@@ -34,7 +39,7 @@ public class HistoryDataVoMapperTest {
     }
 
     @Test
-    //@Ignore
+    @Ignore
     public void insertHistoryData() {
         HistoryDataVo historyDataVo = new HistoryDataVo();
         historyDataVo.setId("555");
@@ -50,7 +55,7 @@ public class HistoryDataVoMapperTest {
     public void updateHistoryData() {
         HistoryDataVo historyDataVo = new HistoryDataVo();
         historyDataVo.setId("666");
-        historyDataVo.setLocation("榕树下");
+        historyDataVo.setDate("2019-02-11");
         int effectedNum = historyDataVoMapper.updateHistoryData(historyDataVo);
         assertEquals(1, effectedNum);
     }
