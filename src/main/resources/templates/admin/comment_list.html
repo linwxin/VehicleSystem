@@ -15,11 +15,11 @@
                         <div class="layui-row layui-col-space10">
                             起始时间：
                             <div class="layui-inline">
-                                <input type="text" class="layui-input" id="startdate" />
+                                <input type="text" class="layui-input" id="startdate" th:value="${dateVO.startTime}" />
                             </div>
                             结束时间：
                             <div class="layui-inline">
-                                <input type="text" class="layui-input" id="enddate" />
+                                <input type="text" class="layui-input" id="enddate" th:value="${dateVO.endTime}"/>
                             </div>
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search for..." />
@@ -67,6 +67,12 @@
                                 </tbody>
                             </table>
                         </div>
+                        <th:block>
+                            <form id="mainForm" th:action="@{/admin/comments}"  method="post">
+                                <input id="h_startdate" name="startDate" type="text" />
+                                <input id="h_enddate" name="endDate"  type="text" />
+                            </form>
+                        </th:block>
 
                         <!-- <div th:replace="comm/macros :: pageAdminNav(${comments})"></div> -->
                     </div>
@@ -102,12 +108,14 @@
         var start = document.getElementById('startdate').value;
         var end = document.getElementById('enddate').value;
         $.ajax({
-            type:'get',
+            type:'post',
             url:'/admin/comments',
             data:{start: start, end: end},
             async: true,
             success: function () {
-                alert("后台查找完毕!");
+                document.getElementById('h_startdate').value = start;
+                document.getElementById('h_enddate').value = end;
+                $("#mainForm").submit();
             }
         });
 

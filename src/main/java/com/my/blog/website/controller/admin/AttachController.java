@@ -21,9 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -121,6 +121,49 @@ public class AttachController extends BaseController {
             LOGGER.error(msg, e);
             return RestResponseBo.fail(msg);
         }
+        return RestResponseBo.ok();
+    }
+
+    @RequestMapping(value = "analysis")
+    @ResponseBody
+    public RestResponseBo analysis(@RequestParam Integer id,HttpServletRequest request) {
+        try {
+            AttachVo attach = attachService.selectById(id);
+            if (null == attach) {
+                return RestResponseBo.fail("不存在该附件");
+            }
+            String filePath = CLASSPATH + attach.getFkey();
+            String host = "127.0.0.1";// 要连接的服务器IP
+            int port = 8384;// 要连接的服务器端口
+            Socket socket = new Socket(host, port);// 与服务器建立连接
+            OutputStream outputStream = socket.getOutputStream();// 获取输入流
+            socket.getOutputStream().write(filePath.getBytes("UTF-8"));
+            socket.shutdownOutput();
+
+//            InputStream inputStream = socket.getInputStream();
+//            byte[] bytes = new byte[1024];
+//            int len;
+//            StringBuilder result = new StringBuilder();
+//            while ((len = inputStream.read(bytes)) != -1) {
+//                result.append(new String(bytes, 0, len, "UTF-8"));
+//            }
+//
+//            inputStream.close();
+            outputStream.close();
+            socket.close();
+        } catch (Exception e) {
+            String msg = "附件分析失败";
+            LOGGER.error(msg, e);
+            return RestResponseBo.fail(msg);
+        }
+        return RestResponseBo.ok();
+    }
+
+    @RequestMapping
+    @ResponseBody
+    public RestResponseBo exportData(@RequestParam Integer id, HttpServletRequest request) {
+
+
         return RestResponseBo.ok();
     }
 

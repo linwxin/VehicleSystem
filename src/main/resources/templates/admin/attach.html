@@ -127,9 +127,12 @@
                                         <a href="javascript:void(0)" th:onclick="'delAttach('+${attach.id}+');'"
                                            class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i
                                                 class="fa "></i> <span>删除</span></a>
-                                        <a href="#"
+                                        <a href="javascript:void(0)"
                                            class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i
                                                 class="fa "></i> <span>查看</span></a>
+                                        <a href="javascript:void(0)" th:onclick="'analysis('+${attach.id}+')'"
+                                           class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i
+                                                class="fa "></i> <span>分析</span></a>
                                         <a href="#"
                                            class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i
                                                 class="fa "></i> <span>导出</span></a>
@@ -196,6 +199,18 @@
                         }
                     }
                 });
+            }
+        });
+    }
+
+    function analysis(id) {
+        $.ajax({
+            type:'post',
+            url:'/admin/attach/analysis',
+            data:{id: id},
+            aysnc: true,
+            success: function(msg) {
+                alert(msg);
             }
         });
     }
